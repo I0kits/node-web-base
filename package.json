@@ -1,0 +1,41 @@
+{
+  "private": true,
+  "version": "1.0.0",
+  "name": "minapp-cloud",
+  "author": "Wang Wei<wangwii@foxmail.com>",
+  "main": "index.js",
+  "engines": {
+    "node": ">= 10.0.0"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "core-js": "3",
+    "cors": "^2.8.5",
+    "errorhandler": "^1.5.1",
+    "express": "^4.17.1",
+    "express-jwt": "^5.3.1",
+    "jsonwebtoken": "^8.5.1",
+    "passport": "^0.4.1",
+    "slug": "^2.1.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/plugin-proposal-object-rest-spread": "^7.9.0",
+    "@babel/polyfill": "^7.8.7",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/register": "^7.9.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "newman": "^4.6.0",
+    "nodemon": "^2.0.2",
+    "source-map-support": "^0.5.16",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-node-externals": "^1.7.2"
+  },
+  "scripts": {
+    "start": "node ./app.js",
+    "dev": "nodemon ./main.js",
+    "build": "webpack --mode production",
+    "stop": "lsof -ti :7000 | xargs kill"
+  }
+}
