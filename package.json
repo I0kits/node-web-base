@@ -24,18 +24,24 @@
     "@babel/polyfill": "^7.8.7",
     "@babel/preset-env": "^7.9.0",
     "@babel/register": "^7.9.0",
+    "clean-webpack-plugin": "^3.0.0",
     "copy-webpack-plugin": "^5.1.1",
+    "del": "^5.1.0",
+    "jaguar": "^6.0.1",
     "newman": "^4.6.0",
     "nodemon": "^2.0.2",
     "source-map-support": "^0.5.16",
     "webpack": "^4.42.1",
     "webpack-cli": "^3.3.11",
-    "webpack-node-externals": "^1.7.2"
+    "webpack-node-externals": "^1.7.2",
+    "webpack-shell-plugin": "^0.5.0"
   },
   "scripts": {
-    "start": "node ./app.js",
-    "dev": "nodemon ./main.js",
+    "dev": "nodemon main.js",
+    "clean": "node builder/clean.js",
     "build": "webpack --mode production",
+    "zip": "yarn install --cwd dist --production && node builder/tarzip.js",
+    "start": "node app/main.js",
     "stop": "lsof -ti :7000 | xargs kill"
   }
 }
