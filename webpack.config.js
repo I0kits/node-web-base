@@ -5,7 +5,6 @@ const WebpackShellPlugin = require('webpack-shell-plugin');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 
 const baseDir = path.join(__dirname, '.');
-//const publicKeyFile = 'app/services/jwtRS256.key.pub';
 
 module.exports = (env, argv) => {
   return {

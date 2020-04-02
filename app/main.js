@@ -2,18 +2,16 @@ import path from 'path';
 import cors from 'cors';
 import express from 'express';
 import passport from 'passport';
-import bodyParser from 'body-parser';
 import errorhandler from 'errorhandler';
 
-import Apis from './apis/index';
+import conf from './config'
+import Apis from './routers/index';
 
 const isProd = process.env.NODE_ENV === 'production';
 
 const app = express();
 
 app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: false}));
 
 if (!isProd) {
   app.use(errorhandler());
@@ -40,11 +38,10 @@ app.use((err, req, res, next) => {
   res.json({
     'errors': {
       message: err.message,
-      error: isProd ? {} : err // Is in production no stacktrace leaked to user
+      error: isProd ? null : err.stack // Is in production no stacktrace leaked to user
     }
   });
 });
 
-const port = process.env.PORT || 7000;
 const mode = isProd ? 'production' : 'development';
-app.listen(port, () => console.log(`Listening on port ${port} in ${mode} mode.`));
+app.listen(conf.port, () => console.log(`Listening on port ${conf.port} in ${mode} mode.`));
