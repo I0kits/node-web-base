@@ -4,17 +4,19 @@
 ### Tasks
 * [] Database integration.
 * [] Setup logger.
+* [] Integration with QQ/Dingding login by [passport](https://github.com/jaredhanson/passport)
 
 
 ### Refs
 * [uni-app](https://uniapp.dcloud.io)
+* [node-express-realworld](https://github.com/gothinkster/node-express-realworld-example-app)
 
 ### Commands
 ```
 export HOSTNAME=http://localhost:3000
 
 curl -X POST -H "Content-Type: application/json" \
-  -d '{"account":"admin","password":"123"}' \
+  -d '{"account":"admin","password":"1234"}' \
   ${HOSTNAME}/api/login
   
   

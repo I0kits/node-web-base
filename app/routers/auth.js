@@ -21,6 +21,7 @@ const getToken = (req) => {
 };
 
 export default {
+  token: getToken,
   required: jwt({secret, getToken}),
   optional: jwt({secret, getToken, credentialsRequired: false}),
 }

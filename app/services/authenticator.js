@@ -22,11 +22,10 @@ const accounts = {
 const jwtSign = (data) => {
   const now = Date.now() / 1000;
   const iat = Math.floor(now);
-  const exp = Math.floor(now) + (60 * 60); //1 hour
+  const exp = Math.floor(now) + (1 * 60); //1 min
+  const payload = {...data, iat, exp};
 
-  const payload = {iat, exp, ...data};
   payload.token = jwt.sign(payload, conf.secret);
-
   return payload;
 };
 
@@ -37,9 +36,21 @@ export default {
     const user = accounts[key];
 
     if (_.isNil(user)) {
-      throw new Error('invalid account or password!');
+      const err = new Error('invalid account or password!');
+      err.status = 400;
+      throw err;
     }
 
     return jwtSign(user);
+  },
+  verify: async (token, dat)=> {
+    try{
+      const payload = jwt.verify(token, conf.secret);
+      return jwtSign(payload);
+    }catch(err) {
+      console.log('verify token error:', err);
+      err.status = 400;
+      throw err;
+    }
   }
 }

@@ -36,10 +36,10 @@ app.use((err, req, res, next) => {
 
   res.status(err.status || 500);
   res.json({
-    'errors': {
-      message: err.message,
-      error: isProd ? null : err.stack // Is in production no stacktrace leaked to user
-    }
+    success: false,
+    errorCode: res.status,
+    errorMessage: err.message,
+    errorStack: isProd ? null : err.stack, // Is in production no stacktrace leaked to user
   });
 });
 
