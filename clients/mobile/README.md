@@ -1,2 +1,0 @@
-# minapp for mobile.
-

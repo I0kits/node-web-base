@@ -5,6 +5,7 @@
 * [] Database integration.
 * [] Setup logger.
 * [] Integration with QQ/Dingding login by [passport](https://github.com/jaredhanson/passport)
+* [] [deno](http://www.ruanyifeng.com/blog/2020/01/deno-intro.html)
 
 
 ### Refs
@@ -13,17 +14,30 @@
 
 ### Commands
 ```
+export TOKEN=''
 export HOSTNAME=http://localhost:3000
 
+# Login
 curl -X POST -H "Content-Type: application/json" \
   -d '{"account":"admin","password":"1234"}' \
-  ${HOSTNAME}/api/login
+  ${HOSTNAME}/api/authors
   
-  
-  
-curl -H "Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE1ODU4MTM3NjAsImV4cCI6MTU4NTgxNzM2MCwibmFtZSI6IueuoeeQhuWRmCIsImljb24iOiJhIHBpY3R1cmUiLCJyb2xlIjoiQURNSU4ifQ.EDh_5A6fOaahnXPV6dK98CxlmtxTYwwLmYVeU_dvXcg" ${HOSTNAME}/api/check
-```  
+# Verify token  
+curl -H "Authorization: Bearer $TOKEN" ${HOSTNAME}/api/check
 
+# List questions
+curl -H "Authorization: Bearer $TOKEN" ${HOSTNAME}/api/questions
+
+# Create Author
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"name": "Lisa","account": "wangwii", "password": "123", "description": "This is description for Lisa."}' \
+  ${HOSTNAME}/api/authors
+  
+# Create Question
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"title": "Lisa","subtitle": "wangwii", "content": "This is description for question content.", "author_id": 2}' \
+  ${HOSTNAME}/api/questions
+```  
 
 
 ### Helper

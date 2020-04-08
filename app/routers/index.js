@@ -1,12 +1,14 @@
+import express from 'express';
+
 import login from './apis/login';
-import users from './apis/users';
+import authors from './apis/authors';
+import questions from './apis/questions';
 
+const router = express.Router();
+router.use(express.json({ limit: '512kb' }));
 
-export default {
-  mount: (uri, app, router) => {
-    login.mount(router);
-    users.mount(router);
+login.mount(router);
+authors.mount(router);
+questions.mount(router);
 
-    app.use(uri, router);
-  }
-}
+export default router;

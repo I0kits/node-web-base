@@ -8,18 +8,24 @@
     "node": ">= 10.0.0"
   },
   "dependencies": {
-    "body-parser": "^1.19.0",
+    "@godaddy/terminus": "^4.3.1",
+    "compression": "^1.7.4",
     "core-js": "3",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "errorhandler": "^1.5.1",
     "express": "^4.17.1",
     "express-jwt": "^5.3.1",
+    "express-paginate": "^1.0.0",
+    "globby": "^11.0.0",
     "jsonwebtoken": "^8.5.1",
     "lodash": "^4.17.15",
     "md5": "^2.2.1",
+    "mysql2": "^2.1.0",
     "passport": "^0.4.1",
-    "slug": "^2.1.1"
+    "sequelize": "^5.21.5",
+    "slug": "^2.1.1",
+    "sqlite3": "^4.1.1"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0",

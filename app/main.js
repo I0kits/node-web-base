@@ -1,23 +1,28 @@
 import path from 'path';
+import http from 'http';
 import cors from 'cors';
 import express from 'express';
 import passport from 'passport';
+import compression from 'compression';
 import errorhandler from 'errorhandler';
+import {createTerminus} from '@godaddy/terminus';
 
 import conf from './config'
 import Apis from './routers/index';
+import Models from './models/index';
 
-const isProd = process.env.NODE_ENV === 'production';
+const databaseRelease = Models.init();
 
 const app = express();
-
 app.use(cors());
+app.use(compression());
 
-if (!isProd) {
+if (!conf.isProd) {
   app.use(errorhandler());
 }
 
-Apis.mount('/api', app, express.Router());
+//Apis.mount('/api', app, express.Router());
+app.use('/api', Apis);
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 
@@ -28,9 +33,8 @@ app.use((req, res, next) => {
   next(err);
 });
 
-
 app.use((err, req, res, next) => {
-  if (!isProd) {
+  if (!conf.isProd) {
     console.log(err.stack); // Is in development will print stacktrace
   }
 
@@ -39,9 +43,20 @@ app.use((err, req, res, next) => {
     success: false,
     errorCode: res.status,
     errorMessage: err.message,
-    errorStack: isProd ? null : err.stack, // Is in production no stacktrace leaked to user
+    errorStack: conf.isProd ? null : err.stack, // Is in production no stacktrace leaked to user
   });
 });
 
-const mode = isProd ? 'production' : 'development';
-app.listen(conf.port, () => console.log(`Listening on port ${conf.port} in ${mode} mode.`));
+const server = createTerminus(http.createServer(app), {
+  timeout: 3000,
+  logger: console.log,
+  signals: ['SIGINT', 'SIGTERM'],
+  onSignal: ()=> {
+    databaseRelease();
+  }
+});
+
+const mode = conf.isProd ? 'Production' : 'Development';
+server.listen(conf.port, () => console.log(`Listening on port ${conf.port} in ${mode} mode.`));
+
+process.on('unhandledRejection', console.error);

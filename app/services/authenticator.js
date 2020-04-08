@@ -7,13 +7,13 @@ import conf from '../config';
 const accounts = {
   // admin-123
   '8af0ce0e22fa0d2c0c48ff69165e4075': {
-    name: '管理员',
+    name: '王伟',
     icon: 'a picture',
     role: 'ADMIN',
   },
   // guest-456
   '147f07283f6521f31106834cb341b736': {
-    name: '访客',
+    name: '老杜',
     icon: 'a picture',
     role: 'GUEST',
   },
@@ -22,7 +22,7 @@ const accounts = {
 const jwtSign = (data) => {
   const now = Date.now() / 1000;
   const iat = Math.floor(now);
-  const exp = Math.floor(now) + (1 * 60); //1 min
+  const exp = Math.floor(now) + (5 * 60); //5 min
   const payload = {...data, iat, exp};
 
   payload.token = jwt.sign(payload, conf.secret);

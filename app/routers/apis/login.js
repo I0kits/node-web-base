@@ -1,5 +1,3 @@
-import bodyParser from 'body-parser';
-
 import auth from '../auth';
 import authenticator from '../../services/authenticator';
 
@@ -22,6 +20,6 @@ const login = (req, res, next) => {
 export default {
   mount: (router) => {
     router.get('/check', auth.required, check);
-    router.post('/login', bodyParser.json(), auth.optional, login);
+    router.post('/login',auth.optional, login);
   }
 }
