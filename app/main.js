@@ -23,6 +23,7 @@ if (!conf.isProd) {
 
 //Apis.mount('/api', app, express.Router());
 app.use('/api', Apis);
+app.use(express.static(path.resolve(__dirname, '..', 'www')));
 app.use(express.static(path.resolve(__dirname, '..', 'public')));
 
 

@@ -1,5 +1,7 @@
 # minapp-cloud
 
+### TODO:
+* password apply md5 before save to database.
 
 ### Tasks
 * [] Database integration.
