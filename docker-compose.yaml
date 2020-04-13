@@ -1,0 +1,30 @@
+version: '2'
+services:
+  web:
+    build: .
+    image: 'rex/minapp:dev'
+    restart: always
+    ports:
+      - "80:3000"
+    links:
+      - db
+    environment:
+      - NODE_ENV=production
+      - SECRET=VbJri5OVHtAPoIAiONmhIiUGenIeurzR7F32SAFZ
+      - DATABASE_URI=mysql://minappman:minappman@127.0.0.1/minappdb
+  db:
+    image: mysql:5.7.29
+    restart: always
+    ports:
+      - 3306:3306
+    command:
+      - --character-set-server=utf8mb4
+      - --explicit_defaults_for_timestamp=1
+      - --collation-server=utf8mb4_unicode_ci
+    volumes:
+      - ./database/data:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: minappdb
+      MYSQL_USER: minappman
+      MYSQL_PASSWORD: minappman
+      MYSQL_ROOT_PASSWORD: root

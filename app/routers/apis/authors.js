@@ -2,7 +2,6 @@ import auth from '../auth';
 import pageable from '../pageable';
 
 import {Author} from '../../models/author';
-import {Account} from "../../models/account";
 
 const list = (req, res, next) => {
   const query = {limit: req.query.limit, offset: req.offset};
@@ -13,9 +12,7 @@ const list = (req, res, next) => {
 
 const create = (req, res, next) => {
   const {account, password, name, description} = req.body;
-
-  const author = Author.build({name, description});
-  Promise.all([author.save(), author.setAccount(Account.build({account, password}))])
+  Author.createNewAuthorAndAccount({account, password, name, description})
     .then(data=> res.json({success: true, data}).end())
     .catch(next);
 };

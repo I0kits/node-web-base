@@ -5,6 +5,10 @@
 www
 dist/
 node_modules/
+database/data/
 
 .env
+.env*
+error*
+.yarnrc
 npm-debug.log

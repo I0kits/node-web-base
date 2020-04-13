@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 
-export class Question extends Sequelize.Model {
+class Question extends Sequelize.Model {
   static init(sequelize, DataTypes) {
     return super.init({
       subtitle: {allowNull: false, type: DataTypes.STRING(255)},
@@ -11,4 +11,7 @@ export class Question extends Sequelize.Model {
   }
 }
 
-export default (sequelize, DataTypes) => Question.init(sequelize, DataTypes);
+module.exports = {
+  Question,
+  default: (sequelize, DataTypes) => Question.init(sequelize, DataTypes),
+};

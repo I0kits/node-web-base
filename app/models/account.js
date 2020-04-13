@@ -1,6 +1,6 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 
-export class Account extends Sequelize.Model {
+class Account extends Sequelize.Model {
   static init(sequelize, DataTypes) {
     return super.init({
       password: {type: DataTypes.STRING(100), allowNull: false},
@@ -9,4 +9,7 @@ export class Account extends Sequelize.Model {
   }
 }
 
-export default (sequelize, DataTypes) => Account.init(sequelize, DataTypes);
+module.exports = {
+  Account,
+  default: (sequelize, DataTypes) => Account.init(sequelize, DataTypes),
+};

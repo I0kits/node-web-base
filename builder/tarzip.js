@@ -8,14 +8,11 @@ const name = config.output;
 const to = path.join(from, name);
 
 const pack = jaguar.pack(from, to, [
-  'app', 'public', 'node_modules',
-  'package.json', 'babel.config.json',
+  'app', 'conf', 'public',
+  '.env', 'babel.config.json', 'package.json'
 ]);
 
 pack.on('start', () => console.log('Start of packing...'));
 pack.on('end', () => console.log(`All files packed to [${name}]`));
 
 pack.on('error', (error) => console.error(error));
-// pack.on('progress', (percent)=> console.log(percent + '%'));
-
-//pack.on('file', (name) => console.log(`Adding ${name}`));
