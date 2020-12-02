@@ -8,7 +8,7 @@ const name = config.output;
 const to = path.join(from, name);
 
 const pack = jaguar.pack(from, to, [
-  'app', 'conf', 'public',
+  'app', 'conf', 'public', 'www',
   '.env', 'babel.config.json', 'package.json'
 ]);
 

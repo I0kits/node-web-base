@@ -2,7 +2,6 @@ const md5 = require('md5');
 const Sequelize = require('sequelize');
 const {Account} = require('./account');
 
-
 class Author extends Sequelize.Model {
   static init(sequelize, DataTypes) {
     return super.init({

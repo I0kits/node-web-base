@@ -1,3 +1,4 @@
+const md5 = require('md5');
 const Sequelize = require('sequelize');
 
 class Account extends Sequelize.Model {
@@ -6,6 +7,10 @@ class Account extends Sequelize.Model {
       password: {type: DataTypes.STRING(100), allowNull: false},
       account: {type: DataTypes.STRING(100), allowNull: false, unique: true},
     }, {sequelize});
+  }
+
+  checkPassword(password) {
+    return this.getDataValue('password') === md5(password);
   }
 }
 

@@ -2,7 +2,6 @@ import path from 'path';
 import http from 'http';
 import cors from 'cors';
 import express from 'express';
-import passport from 'passport';
 import compression from 'compression';
 import errorhandler from 'errorhandler';
 import {createTerminus} from '@godaddy/terminus';
@@ -10,8 +9,9 @@ import {createTerminus} from '@godaddy/terminus';
 import conf from './config'
 import Apis from './routers/index';
 import Models from './models/index';
+import Passport from './services/passport/index';
 
-const databaseRelease = Models.init();
+// Models.init(Passport.init);
 
 const app = express();
 app.use(cors());
@@ -52,8 +52,8 @@ const server = createTerminus(http.createServer(app), {
   timeout: 3000,
   logger: console.log,
   signals: ['SIGINT', 'SIGTERM'],
-  onSignal: ()=> {
-    databaseRelease();
+  onSignal: () => {
+    Models.free();
   }
 });
 

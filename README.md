@@ -1,18 +1,11 @@
 # minapp-cloud
 
-### TODO:
-* password apply md5 before save to database.
 
 ### Tasks
-* [] Database integration.
-* [] Setup logger.
+* [] Setup loggers.
+* [x] Database integration.
 * [] Integration with QQ/Dingding login by [passport](https://github.com/jaredhanson/passport)
-* [] [deno](http://www.ruanyifeng.com/blog/2020/01/deno-intro.html)
 
-
-### Refs
-* [uni-app](https://uniapp.dcloud.io)
-* [node-express-realworld](https://github.com/gothinkster/node-express-realworld-example-app)
 
 ### Commands
 ```
@@ -30,6 +23,11 @@ curl -H "Authorization: Bearer $TOKEN" ${HOSTNAME}/api/check
 # List questions
 curl -H "Authorization: Bearer $TOKEN" ${HOSTNAME}/api/questions
 
+# Login
+curl -X POST -H "Content-Type: application/json" \
+  -d '{"account": "wangwii", "password": "123"}' \
+  ${HOSTNAME}/api/login
+
 # Create Author
 curl -X POST -H "Content-Type: application/json" \
   -d '{"name": "Lisa","account": "wangwii", "password": "123", "description": "This is description for Lisa."}' \
@@ -41,6 +39,10 @@ curl -X POST -H "Content-Type: application/json" \
   ${HOSTNAME}/api/questions
 ```  
 
+### leaning
+* [egg](https://eggjs.org)
+* [passport](http://www.passportjs.org/docs/downloads/html)
+* [deno](http://www.ruanyifeng.com/blog/2020/01/deno-intro.html)
 
 ### Helper
 * 宜搭(https://yida.alibaba-inc.com)
